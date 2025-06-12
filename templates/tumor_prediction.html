@@ -77,12 +77,17 @@
                     </div>
 
                     <div class="flex justify-center">
-                        <button type="submit" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all duration-200">
+                        <button id="submit-button" type="submit" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all duration-200">
                             Analizar imagen
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" clip-rule="evenodd" />
                             </svg>
                         </button>
+                        <!-- Loading spinner (hidden by default) -->
+                        <div id="loading-spinner" class="hidden flex flex-col items-center">
+                            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mb-3"></div>
+                            <p class="text-sm text-gray-600">Procesando imagen...</p>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -183,6 +188,20 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
+
+    // Add form submission handling to show loading spinner
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('form');
+        const submitButton = document.getElementById('submit-button');
+        const loadingSpinner = document.getElementById('loading-spinner');
+
+        form.addEventListener('submit', function() {
+            // Hide submit button and show loading spinner
+            submitButton.classList.add('hidden');
+            loadingSpinner.classList.remove('hidden');
+        });
+    });
     </script>
 </body>
 </html>
+``` 
